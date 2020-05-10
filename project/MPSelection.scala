@@ -78,6 +78,7 @@ object MPSelection {
       case (false) =>
         exercises.map {exercise =>
           s"""lazy val $exercise = project
+             |  .settings(scalaVersion := CommonSettings.dottyVersion)
              |  .settings(CommonSettings.commonSettings: _*)
              |  .dependsOn(common % "test->test;compile->compile")
              |""".stripMargin
@@ -85,6 +86,7 @@ object MPSelection {
       case (true) =>
         exercises.map {exercise =>
           s"""lazy val $exercise = project
+             |  .settings(scalaVersion := CommonSettings.dottyVersion)
              |  .settings(SbtMultiJvm.multiJvmSettings: _*)
              |  .settings(CommonSettings.commonSettings: _*)
              |  .configs(MultiJvm)
@@ -110,6 +112,7 @@ object MPSelection {
               |
               |lazy val common = project
               |  .settings(CommonSettings.commonSettings: _*)
+              |  .settings(scalaVersion := CommonSettings.dottyVersion)
               |
               |${exerciseProjects(exercises, multiJVM)}""".stripMargin
 
